@@ -19,6 +19,7 @@ cd my-project && npm run serve
 
 ## 项目模板具体目录结构
 
+```
 template
 ├─ src
 │ ├─ App.vue
@@ -52,3 +53,4 @@ template
 │ └─ index.html
 ├─ proxy.config.js
 └─ vue.config.js
+```
