@@ -30,7 +30,7 @@ module.exports = (api, options, rootOptions) => {
   //     .forEach(path => delete files[path]);
   // });
 
-  // api.onCreateComplete(() => {
-  //   utils.deleteFile("./src/store.js");
-  // });
+  api.onCreateComplete(() => {
+    utils.deleteFile("./src/components/HelloWorld.vue");
+  });
 };
