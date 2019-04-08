@@ -1,0 +1,30 @@
+{
+  "name": "front-cli-preset",
+  "version": "1.0.0",
+  "description": "vue-cli3 的 preset git repo 前端项目模板",
+  "main": "./generator/index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ducenand/front-cli-preset.git"
+  },
+  "keywords": [
+    "preset",
+    "vue-cli3"
+  ],
+  "author": "ducenand",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ducenand/front-cli-preset/issues"
+  },
+  "homepage": "https://github.com/ducenand/front-cli-preset#readme",
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4",
+    "vuepress": "^0.14.10"
+  }
+}
