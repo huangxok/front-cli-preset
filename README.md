@@ -1,5 +1,9 @@
 # front-cli-preset
 
+[![vue/cli](https://badge.fury.io/js/%40vue%2Fcli.svg)](https://badge.fury.io/js/%40vue%2Fcli)
+[![vue](https://badge.fury.io/js/vue.svg)](https://badge.fury.io/js/vue)
+[![axios](https://badge.fury.io/js/axios.svg)](https://badge.fury.io/js/axios)
+[![element-ui](https://badge.fury.io/js/element-ui.svg)](https://badge.fury.io/js/element-ui)
 基于 vue-cli3 preset 搭建的前端项目模板
 
 ## 快速开始
