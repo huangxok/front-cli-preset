@@ -8,7 +8,7 @@
 </template>
 
 <style lang="scss">
-@import "~@assets/sass/variable";
+@import "~@/assets/sass/variable";
 .container {
   padding: 100px;
   text-align: center;
