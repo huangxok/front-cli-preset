@@ -6,11 +6,11 @@ module.exports = (api, options, rootOptions) => {
     dependencies: {
       axios: "^0.18.0",
       qs: "^6.5.2",
-      vue: "^2.6.10",
+      vue: "^2.6.6",
       "vue-router": "^3.0.1",
       vuex: "^3.0.1",
       "normalize.css": "^8.0.1",
-      "element-ui": "^2.7.2"
+      "element-ui": "^2.7.0"
     }
   });
 

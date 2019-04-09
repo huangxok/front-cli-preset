@@ -1,9 +1,10 @@
 # front-cli-preset
 
-[![vue/cli](https://badge.fury.io/js/%40vue%2Fcli.svg)](https://badge.fury.io/js/%40vue%2Fcli)
-[![vue](https://badge.fury.io/js/vue.svg)](https://badge.fury.io/js/vue)
-[![axios](https://badge.fury.io/js/axios.svg)](https://badge.fury.io/js/axios)
-[![element-ui](https://badge.fury.io/js/element-ui.svg)](https://badge.fury.io/js/element-ui)
+[![license](https://img.shields.io/badge/%40vue%2Fcli-%5E3.5.0-brightgreen.svg)](https://github.com/vuejs/vue-cli)
+[![license](https://img.shields.io/badge/vue-%5E2.6.6-brightgreen.svg)](https://github.com/vuejs/vue)
+[![license](https://img.shields.io/badge/axios-%5E0.18.0-brightgreen.svg)](https://github.com/axios/axios)
+[![license](https://img.shields.io/badge/element--ui-%5E2.7.0-brightgreen.svg)](https://github.com/ElemeFE/element)
+
 基于 vue-cli3 preset 搭建的前端项目模板
 
 ## 快速开始
