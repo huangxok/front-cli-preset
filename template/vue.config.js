@@ -8,6 +8,7 @@ module.exports = {
     host: "0.0.0.0",
     port: "8090",
     https: false,
+    open: true,
     proxy: proxyConfig.proxy
   }
 };
