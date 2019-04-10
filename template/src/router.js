@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/home";
-
+const loadView = view => () => import(`@views/${view}`);
 Vue.use(Router);
 
 export default new Router({
@@ -16,7 +15,7 @@ export default new Router({
     {
       path: "/home",
       name: "home",
-      component: Home
+      component: loadView("home")
     }
     // {
     //   path: "/about",

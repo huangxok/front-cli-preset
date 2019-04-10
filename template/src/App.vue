@@ -36,6 +36,7 @@ export default {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+  min-width: 1200px;
   main {
     flex: 1;
   }

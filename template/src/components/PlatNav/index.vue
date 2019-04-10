@@ -1,64 +1,71 @@
 <template>
-  <header class="header">
-    <div class="h-nav" :class="{ 'top-fixed': topFixed }">
-      <div class="plat-con">
-        <div class="logo" @click="goHome"></div>
-        <ul class="nav-list">
-          <li v-for="(item, index) in navList" :key="index">
-            <router-link :to="item.pathname" v-if="item.origin">{{
-              item.name
-            }}</router-link>
-            <a :href="item.pathname" v-else>{{ item.name }}</a>
-          </li>
-        </ul>
+  <affix>
+    <header class="header">
+      <div class="h-nav">
+        <div class="plat-con">
+          <div class="logo" @click="goHome"></div>
+          <ul class="nav-list">
+            <li v-for="(item, index) in navList" :key="index">
+              <router-link :to="item.pathname" v-if="item.origin">{{
+                item.name
+              }}</router-link>
+              <a :href="item.pathname" v-else>{{ item.name }}</a>
+            </li>
+          </ul>
 
-        <div class="user-info">
-          <el-button
-            v-if="!$store.state.userInfo.account"
-            size="mini"
-            @click="login"
-            >登录</el-button
-          >
-          <template v-else>
-            <el-dropdown @visible-change="dropStatus" @command="handleCommand">
-              <span class="el-dropdown-link">
-                <b class="name">{{ userInfo.name }}</b>
-                <img
-                  :src="[
-                    userInfo.photo
-                      ? downloadUrl + '/' + userInfo.photo
-                      : userDefault
-                  ]"
-                  alt="img"
-                />
-                <i
-                  :class="[
-                    arrowDisplay
-                      ? 'el-icon-arrow-up el-icon--right'
-                      : 'el-icon-arrow-down el-icon--right'
-                  ]"
-                ></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="2">我的学校</el-dropdown-item>
-                <el-dropdown-item command="1">退出登录</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </template>
+          <div class="user-info">
+            <el-button
+              v-if="!$store.state.userInfo.account"
+              size="mini"
+              @click="login"
+              >登录</el-button
+            >
+            <template v-else>
+              <el-dropdown
+                @visible-change="dropStatus"
+                @command="handleCommand"
+              >
+                <span class="el-dropdown-link">
+                  <b class="name">{{ userInfo.name }}</b>
+                  <img
+                    :src="[
+                      userInfo.photo
+                        ? downloadUrl + '/' + userInfo.photo
+                        : userDefault
+                    ]"
+                    alt="img"
+                  />
+                  <i
+                    :class="[
+                      arrowDisplay
+                        ? 'el-icon-arrow-up el-icon--right'
+                        : 'el-icon-arrow-down el-icon--right'
+                    ]"
+                  ></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item command="2">我的学校</el-dropdown-item>
+                  <el-dropdown-item command="1">退出登录</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </template>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="clear" v-show="topFixed"></div>
-  </header>
+    </header>
+  </affix>
 </template>
 
 <script>
 import userDefault from "@/assets/images/nav/user-default.svg";
+import Affix from "./Affix";
 import { mapState } from "vuex";
 export default {
+  components: {
+    Affix
+  },
   data() {
     return {
-      topFixed: false,
       userDefault: userDefault,
       scroll: 0,
       el_Height: 78,
@@ -69,37 +76,17 @@ export default {
   computed: {
     ...mapState({
       userInfo: state => state.userInfo.account.userInfo,
-      downloadUrl: state => state.frontConfig.downloadUrl
+      downloadUrl: state => state.frontConfig.downloadUrl,
+      hostUrl: state => state.frontConfig
     })
   },
   methods: {
-    checkMsg() {
-      this.$router.push({ name: "pubNotice" });
-    },
     dropStatus(status) {
       // 用户信息展示更换箭头
       this.arrowDisplay = status;
     },
     goHome() {
       this.$router.push({ name: "home" });
-    },
-    getScroll() {
-      this.scroll =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      if (this.scroll > this.el_Height) {
-        this.topFixed = true;
-      } else {
-        this.topFixed = false;
-      }
-    },
-    debounce(delay, cb) {
-      let timer;
-      return function() {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-          cb.apply(this);
-        }, delay);
-      };
     },
     login() {
       window.location.href = `/login?routeurl=${window.location.origin}`;
@@ -109,41 +96,26 @@ export default {
         window.location.href = "/logout";
       } else if (command === "2") {
         window.location.href =
-          this.HOST.homeHost + "/org/" + this.userInfo.orgId;
+          this.hostUrl.homeHost + "/org/" + this.userInfo.orgId;
       }
     }
   },
   created() {
     this.navList = [
       { name: "首页", pathname: "/home", origin: true },
-      { name: "互动空间", pathname: this.HOST.spaceHost, origin: false },
-      { name: "资源中心", pathname: this.HOST.resHost, origin: false }
+      { name: "互动空间", pathname: this.hostUrl.spaceHost, origin: false },
+      { name: "资源中心", pathname: this.hostUrl.resHost, origin: false }
     ];
   },
-  mounted() {
-    if (window.attachEvent) {
-      window.attachEvent("onscroll", this.debounce(30, this.getScroll));
-    } else {
-      window.addEventListener("scroll", this.debounce(30, this.getScroll));
-    }
-  }
+  mounted() {}
 };
 </script>
 
 <style lang="scss">
 .header {
-  .top-fixed {
-    position: fixed;
-    top: 0px;
-    z-index: 99;
-  }
-  .clear {
-    width: 100%;
-    height: 78px;
-  }
   .h-nav {
     width: 100%;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.09);
     background: #fff;
     .plat-con {
       width: 1200px;

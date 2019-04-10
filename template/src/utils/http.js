@@ -1,14 +1,17 @@
 import axios from "axios";
 import Qs from "qs";
-//axios.defaults.baseURL = DOMAIN_URL;
+
 // 设置axios默认Content-type类型
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.withCredentials = true;
-axios.defaults.timeout = 5000;
 
-axios.defaults.transformRequest = [
-  function(data) {
-    //console.log(data);
+const service = axios.create({
+  timeout: 10000,
+  withCredentials: true,
+  headers: { "X-Requested-With": "XMLHttpRequest" }
+});
+
+service.defaults.transformRequest = [
+  data => {
     if (data instanceof FormData) {
       return data;
     }
@@ -16,8 +19,8 @@ axios.defaults.transformRequest = [
     return data;
   }
 ];
-axios.defaults.transformResponse = [
-  function(data) {
+service.defaults.transformResponse = [
+  data => {
     data = JSON.parse(data);
     if (data.code === "100009" || data.code === "100016") {
       window.location.href = `/login?routeurl=${
@@ -29,17 +32,17 @@ axios.defaults.transformResponse = [
   }
 ];
 
-axios.interceptors.request.use(
-  function(config) {
-    config.headers["X-Requested-With"] = "XMLHttpRequest";
+service.interceptors.request.use(
+  config => {
+    // config.headers["X-Requested-With"] = "XMLHttpRequest";
     return config;
   },
-  function(error) {
+  error => {
     return Promise.reject(error);
   }
 );
 
-axios.interceptors.response.use(
+service.interceptors.response.use(
   res => {
     return res;
   },
@@ -48,9 +51,9 @@ axios.interceptors.response.use(
   }
 );
 
-function http(url, params = null, type = "get") {
+const http = (url, params = null, type = "get") => {
   return new Promise((resolve, reject) => {
-    axios[type](
+    service[type](
       url,
       type === "get"
         ? {
@@ -70,17 +73,18 @@ function http(url, params = null, type = "get") {
         reject(err);
       });
   });
-}
+};
 
-const get = function(url, params = null) {
+const get = (url, params = null) => {
   return http(url, params, "get");
 };
 
-const post = function(url, params = null) {
+const post = (url, params = null) => {
   return http(url, params, "post");
 };
 
 export default {
+  service,
   http,
   get,
   post

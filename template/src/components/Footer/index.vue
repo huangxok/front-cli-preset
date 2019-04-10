@@ -1,6 +1,6 @@
 <template>
   <div class="footer-box">
-    Copyright © 2018 好未来版权所有 北京世纪好未来教育科技有限公司
+    Copyright © 2019 好未来版权所有 北京世纪好未来教育科技有限公司
     京ICP备13017119号-2
   </div>
 </template>
