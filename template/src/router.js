@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-const loadView = view => () => import(`@views/${view}`);
+const loadView = view => () => import(`@/views/${view}`);
 Vue.use(Router);
 
 export default new Router({
