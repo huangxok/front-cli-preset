@@ -13,7 +13,7 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key]);
 });
 
-const FrontInit = async parms => {
+const Init = async parms => {
   await store.dispatch("getFrontConfig"); //获取配置
   axios.defaults.baseURL =
     process.env.NODE_ENV === "production"
@@ -21,7 +21,7 @@ const FrontInit = async parms => {
       : "";
   return new Vue(parms).$mount("#app");
 };
-FrontInit({
+Init({
   router,
   store,
   render: h => h(App)
